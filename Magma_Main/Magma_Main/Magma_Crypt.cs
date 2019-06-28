@@ -56,6 +56,7 @@ namespace Magma_Main
             {
                 Res = Magma_G(iter_keys[i], Res[1], Res[0]);
             }
+            Array.Reverse(Res);
             return Res;
         }
 
@@ -67,6 +68,7 @@ namespace Magma_Main
             {
                 Res = Magma_G(iter_keys[i], Res[1], Res[0]);
             }
+            Array.Reverse(Res);
             return Res;
         }
 

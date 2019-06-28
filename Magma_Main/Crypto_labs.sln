@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magma_Main", "Magma_Main\Magma_Main.csproj", "{E23192B3-123C-45B7-AE6B-2E9A3697B9E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSA_Crypt", "RSA_Crypt\RSA_Crypt.csproj", "{3CAA9AE8-5FDB-4CBD-8580-2BF71EEB7711}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E23192B3-123C-45B7-AE6B-2E9A3697B9E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E23192B3-123C-45B7-AE6B-2E9A3697B9E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E23192B3-123C-45B7-AE6B-2E9A3697B9E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CAA9AE8-5FDB-4CBD-8580-2BF71EEB7711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CAA9AE8-5FDB-4CBD-8580-2BF71EEB7711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CAA9AE8-5FDB-4CBD-8580-2BF71EEB7711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CAA9AE8-5FDB-4CBD-8580-2BF71EEB7711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
