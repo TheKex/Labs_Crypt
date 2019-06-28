@@ -12,16 +12,30 @@ namespace RSA_Crypt
     {
         BigInteger e, n, _f_n, d;
 
+        public RSA() { }
+
         public RSA(BigInteger p, BigInteger q)
         {
-            this.n = p * q;
+            if (!IsPrime(p))
+                throw new Exception("P должно быть простым числом");
+            if (!IsPrime(q))
+                throw new Exception("Q должно быть простым числом");
+
+            n = p * q;
             _f_n = Eiler(p, q);
+            Refresh_E();
         }
 
         public void Set_p_q(BigInteger p, BigInteger q)
         {
-            this.n = p * q;
+            if (!IsPrime(p))
+                throw new Exception("P должно быть простым числом");
+            if (!IsPrime(q))
+                throw new Exception("Q должно быть простым числом");
+
+           n = p * q;
             _f_n = Eiler(p, q);
+           Refresh_E();
         }
 
         public BigInteger Encrypt(BigInteger msg)
@@ -48,7 +62,11 @@ namespace RSA_Crypt
         public static BigInteger Power(BigInteger value, BigInteger pow)
         {
             BigInteger tmp = value;
-            for (BigInteger i = 0; i < pow; i++)
+            if(pow == 0)
+            {
+                return 1;
+            }
+            for (BigInteger i = 0; i < pow - 1; i++)
             {
                 tmp *= value;
             }
@@ -63,9 +81,12 @@ namespace RSA_Crypt
         /// <returns></returns>
         private BigInteger Get_D(BigInteger f_n, BigInteger e)
         {
-            return Extended_Euclid(e, f_n)[1];
+            BigInteger res = Extended_Euclid(f_n, e)[2];
+            if (res < 0)
+                res = f_n + res;
+            return res;
         }
-        
+
         public static BigInteger Eiler(BigInteger p, BigInteger q)
         {
             return (p - 1) * (q - 1);
@@ -125,5 +146,53 @@ namespace RSA_Crypt
             return res;
         }
 
+
+        public void Refresh_E()
+        {
+            bool IsCorrect = false;
+            Random R = new Random();
+            while (!IsCorrect)
+            {
+                e = R.Next(2, (int)_f_n - 1);
+                if(Euclid(e, _f_n) == 1)
+                {
+                    IsCorrect = true;
+                }
+            }
+            d = Get_D(_f_n, e);
+        }
+
+        public BigInteger E
+        {
+            get { return e; }
+            set
+            {
+                if(Euclid(value, _f_n) != 1)
+                {
+                    throw new Exception("e не взаимопростое с " + _f_n.ToString());
+                }
+                else if (value >= _f_n)
+                {
+                    throw new Exception("e больше или равно " + _f_n.ToString());
+                }
+                else if (value <= 1)
+                {
+                    throw new Exception("e меньше или равно 1");
+                }
+                else
+                {
+                    e = value;
+                    d = Get_D(_f_n, e);
+                }
+            }
+        }
+        public BigInteger D
+        {
+            get { return d; }
+        }
+        public BigInteger N
+        {
+            get { return n; }
+        }
     }
 }
